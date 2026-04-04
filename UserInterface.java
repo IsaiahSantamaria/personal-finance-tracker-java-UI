@@ -30,8 +30,6 @@ public class UserInterface implements Runnable, ActionListener{
     /**text display content for accounts */
     private JLabel displayAccounts;
 
-    
-
     /** Print transaction history into CSV file format */
     private JButton printCSVButton;
 
@@ -71,6 +69,7 @@ public class UserInterface implements Runnable, ActionListener{
 
 
 
+
         
         //adding top and bottom panel to frame
         
@@ -82,7 +81,7 @@ public class UserInterface implements Runnable, ActionListener{
         accountsCont.setPreferredSize(new Dimension(370,370));
         displayAccounts.setHorizontalAlignment(SwingConstants.CENTER);
         accountsCont.add(displayAccounts, BorderLayout.CENTER);
-
+        accountsCont.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         /** Setting input panel
          * 
         */
@@ -102,14 +101,21 @@ public class UserInterface implements Runnable, ActionListener{
 
         transInputCont.add(centerWrapper ,BorderLayout.CENTER);
 
+        transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
 
 
         /** Setting up bottom transaction section */
-        recentTransCont = new JPanel(new GridLayout(6,0));
-        for(int i = 0; i < 6; i ++){
-            
-            recentTransCont.add(new JLabel("Transaction type: ?, Amount: ?, Reason: ?"));
+        recentTransCont = new JPanel(new GridLayout(10,0));
+        for(int i = 0; i < 10; i ++){
+            JLabel tmpTrans = new JLabel("Transaction type: ?, Amount: ?, Reason:  ?");
+            tmpTrans.setFont(new Font("Arial", Font.BOLD, 25));
+            recentTransCont.add(tmpTrans);
+
         }
+        recentTransCont.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        bottomPanel.add(printCSVButton, BorderLayout.SOUTH);
+        bottomPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
         
         
@@ -122,6 +128,7 @@ public class UserInterface implements Runnable, ActionListener{
         topPanel.add(accountsCont, BorderLayout.WEST);
         topPanel.add(transInputCont, BorderLayout.EAST);
 
+        
         bottomPanel.add(recentTransCont);
 
        
