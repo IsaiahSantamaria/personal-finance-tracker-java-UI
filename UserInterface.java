@@ -25,8 +25,6 @@ public class UserInterface implements Runnable, ActionListener{
     /** Recent Transaction Container */
     private JPanel recentTransCont;
 
-    
-
     /**text display content for accounts */
     private JLabel displayAccounts;
 
@@ -39,6 +37,8 @@ public class UserInterface implements Runnable, ActionListener{
     /**Expense Transaction Button */
     private JButton expenseButton;
 
+    private JButton submit = new JButton("Submit");
+
     public UserInterface(){
         accountsCont = new JPanel();
         transInputCont = new JPanel();
@@ -48,6 +48,11 @@ public class UserInterface implements Runnable, ActionListener{
         printCSVButton = new JButton("Print");
         expenseButton = new JButton("Expense");
         incomeButton = new JButton("Income");
+        
+        submit.addActionListener(this);
+        expenseButton.addActionListener(this);
+        incomeButton.addActionListener(this);
+    
 
     }
 
@@ -107,14 +112,14 @@ public class UserInterface implements Runnable, ActionListener{
 
         /** Setting up bottom transaction section */
         recentTransCont = new JPanel(new GridLayout(10,0));
-        for(int i = 0; i < 10; i ++){
+        for(int i = 0; i < 9; i ++){
             JLabel tmpTrans = new JLabel("Transaction type: ?, Amount: ?, Reason:  ?");
             tmpTrans.setFont(new Font("Arial", Font.BOLD, 25));
             recentTransCont.add(tmpTrans);
 
         }
         recentTransCont.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        bottomPanel.add(printCSVButton, BorderLayout.SOUTH);
+        recentTransCont.add(printCSVButton);
         bottomPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
         
@@ -147,7 +152,96 @@ public class UserInterface implements Runnable, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //if instance a JButton
+        if(e.getSource() instanceof JButton ){
+            JButton buttonPressed = (JButton) e.getSource();
+            String buttonPressedText = buttonPressed.getText();
+            if(buttonPressedText.equals("Income")){ // if incomeButton is pressed
+                //call out repaint income function
+                incomePressed();
+            }else if(buttonPressedText.equals("Expense")){ // if expenseButton is pressed
+                //call out repaint expense function
+                expensePressed();
+            }else if(buttonPressedText.equals("Submit")){
+                resetInputTransCont();
+                
+            }
+
+        }
+
     }
+    /**
+     * when JButton income is pressed,
+     * it changes the transInputCont panel 
+     * for income inputs
+     */
+    private void incomePressed(){
+        clearTransInputCont(); //clears panel
+
+
+
+        //setting up submit button
+        JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        option.add(submit, BorderLayout.SOUTH);
+        //GridBagLayout is more dynamic/flexible than GridLayout
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.add(option,new GridBagConstraints());
+        transInputCont.add(centerWrapper ,BorderLayout.SOUTH);
+        transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        
+        
+    }
+
+    /**
+     * 
+     */
+    private void expensePressed(){
+        clearTransInputCont(); // clear panel
+        
+
+
+        //setting up submit button
+        JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        option.add(submit, BorderLayout.SOUTH);
+        //GridBagLayout is more dynamic/flexible than GridLayout
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.add(option,new GridBagConstraints());
+        transInputCont.add(centerWrapper ,BorderLayout.SOUTH);
+        transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+
+    }
+
+    private void resetInputTransCont(){
+        clearTransInputCont(); // clear panel
+        
+        transInputCont.setLayout(new BorderLayout());
+        expenseButton.setPreferredSize(new Dimension(100,50));
+        incomeButton.setPreferredSize(new Dimension(100,50));
+        JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        option.add(expenseButton, BorderLayout.WEST);
+        option.add(incomeButton, BorderLayout.EAST );
+        //GridBagLayout is more dynamic/flexible than GridLayout
+        JPanel centerWrapper = new JPanel(new GridBagLayout());
+        centerWrapper.add(option,new GridBagConstraints());
+        transInputCont.add(centerWrapper ,BorderLayout.CENTER);
+        transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+        transInputCont.repaint();
+    }
+
+   
+
+    /**
+     * clears transInputCont Panel
+     */
+    private void clearTransInputCont(){
+        transInputCont.removeAll(); //clears all child component
+        transInputCont.revalidate(); //tells the layout manager to re-layout
+        transInputCont.repaint(); //repaint the panel
+    }
+
+
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new UserInterface());
 
