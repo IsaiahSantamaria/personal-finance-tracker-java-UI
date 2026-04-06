@@ -52,11 +52,7 @@ public class UserInterface implements Runnable, ActionListener{
         submit.addActionListener(this);
         expenseButton.addActionListener(this);
         incomeButton.addActionListener(this);
-    
-
     }
-
-
 
     @Override 
     public void run(){
@@ -71,11 +67,6 @@ public class UserInterface implements Runnable, ActionListener{
         JPanel bottomPanel = new JPanel();
         framePanel.setLayout(new BorderLayout());
 
-
-
-
-
-        
         //adding top and bottom panel to frame
         
         framePanel.add(topPanel, BorderLayout.NORTH);
@@ -93,20 +84,8 @@ public class UserInterface implements Runnable, ActionListener{
         
         transInputCont.setPreferredSize(new Dimension(370,370));
         
-        transInputCont.setLayout(new BorderLayout());
-        expenseButton.setPreferredSize(new Dimension(100,50));
-        incomeButton.setPreferredSize(new Dimension(100,50));
-        JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        option.add(expenseButton, BorderLayout.WEST);
-        option.add(incomeButton, BorderLayout.EAST );
-
-        //GridBagLayout is more dynamic/flexible than GridLayout
-        JPanel centerWrapper = new JPanel(new GridBagLayout());
-        centerWrapper.add(option,new GridBagConstraints());
-
-        transInputCont.add(centerWrapper ,BorderLayout.CENTER);
-
-        transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        
+        resetInputTransCont();
 
 
 
