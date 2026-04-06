@@ -37,7 +37,22 @@ public class UserInterface implements Runnable, ActionListener{
     /**Expense Transaction Button */
     private JButton expenseButton;
 
+    /**Amount that is used for income or expense */
+    private JSpinner amount;
+
+    /** text field for reasoning */
+    private JTextField reason;
+
+    /**temporary account list */
+    private String [] accountNames = {"Checking","Savings","Joint"};
+
+    private String [] categoryNames = {"Bills", "Shopping", "Necessities", "Utilities", "Others"};
+
+    private ButtonGroup group;
+
     private JButton submit = new JButton("Submit");
+
+    
 
     public UserInterface(){
         accountsCont = new JPanel();
@@ -48,7 +63,10 @@ public class UserInterface implements Runnable, ActionListener{
         printCSVButton = new JButton("Print");
         expenseButton = new JButton("Expense");
         incomeButton = new JButton("Income");
-        
+        reason = new JTextField(20);
+
+        group = new ButtonGroup();
+
         submit.addActionListener(this);
         expenseButton.addActionListener(this);
         incomeButton.addActionListener(this);
@@ -101,9 +119,6 @@ public class UserInterface implements Runnable, ActionListener{
         recentTransCont.add(printCSVButton);
         bottomPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
-        
-        
-
 
         // having top panel add totalAccount panel and input transaction 
         // by using borderlayout to organize them both)
@@ -123,10 +138,6 @@ public class UserInterface implements Runnable, ActionListener{
         frame.setVisible(true);
 
     }
-
-    
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -156,8 +167,25 @@ public class UserInterface implements Runnable, ActionListener{
      */
     private void incomePressed(){
         clearTransInputCont(); //clears panel
+        amount = new JSpinner(new SpinnerNumberModel(1.0,0.01, Double.MAX_VALUE,1));
+        JPanel container = new JPanel(new GridLayout(3,3));
 
+        container.add(new JLabel("Amount: "));
+        container.add(amount);
+        container.add(new JLabel("Source: "));
+        container.add(reason);
+        container.add(new JLabel("Destination: "));
 
+        JPanel tmp = new JPanel();
+
+        //JPanel tmp = new JPanel(new GridLayout(1,accountNames.length));
+        for(int i =0; i < accountNames.length;i ++){
+            JRadioButton account = new JRadioButton(accountNames[i]);
+            group.add(account);
+            tmp.add(account);
+        }
+
+        container.add(tmp);
 
         //setting up submit button
         JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -167,7 +195,8 @@ public class UserInterface implements Runnable, ActionListener{
         centerWrapper.add(option,new GridBagConstraints());
         transInputCont.add(centerWrapper ,BorderLayout.SOUTH);
         transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        
+        transInputCont.add(container, BorderLayout.NORTH);
+    
         
     }
 
@@ -175,9 +204,28 @@ public class UserInterface implements Runnable, ActionListener{
      * 
      */
     private void expensePressed(){
-        clearTransInputCont(); // clear panel
-        
+        clearTransInputCont(); //clears panel
+        amount = new JSpinner(new SpinnerNumberModel(1.0,0.01, Double.MAX_VALUE,1));
+        JPanel container = new JPanel(new GridLayout(3,3));
 
+        container.add(new JLabel("Amount: "));
+        container.add(amount);
+
+        container.add(new JLabel("Category: "));
+
+        JPanel tmp = new JPanel();
+
+        //JPanel tmp = new JPanel(new GridLayout(1,accountNames.length));
+        for(int i =0; i < categoryNames.length;i ++){
+            JRadioButton categories = new JRadioButton(categoryNames[i]);
+            group.add(categories);
+            tmp.add(categories);
+        }
+        container.add(tmp);
+
+        container.add(new JLabel("Further Specification: "));
+        container.add(reason);
+        
 
         //setting up submit button
         JPanel option = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -187,7 +235,7 @@ public class UserInterface implements Runnable, ActionListener{
         centerWrapper.add(option,new GridBagConstraints());
         transInputCont.add(centerWrapper ,BorderLayout.SOUTH);
         transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-
+        transInputCont.add(container, BorderLayout.NORTH);
 
     }
 
@@ -224,6 +272,5 @@ public class UserInterface implements Runnable, ActionListener{
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new UserInterface());
 
-        
     }
 }
