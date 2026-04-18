@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class UserInterface implements Runnable, ActionListener{
 
-    private static final int PADDING = 20;
+    private static final int PADDING = 25;
 
     /** Accounts Display Container */
     private JPanel accountsCont;
@@ -149,16 +149,38 @@ public class UserInterface implements Runnable, ActionListener{
             if(buttonPressedText.equals("Income")){ // if incomeButton is pressed
                 //call out repaint income function
                 incomePressed();
+                /**add functions for backend stuff 
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                */
+                
             }else if(buttonPressedText.equals("Expense")){ // if expenseButton is pressed
                 //call out repaint expense function
                 expensePressed();
+                /**add functions for backend stuff
+                 * 
+                 * 
+                 * 
+                 * 
+                 */
+                
             }else if(buttonPressedText.equals("Submit")){
                 resetInputTransCont();
+
+
+                /**add functions for backend stuff
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 */
                 
             }
-
         }
-
     }
     /**
      * when JButton income is pressed,
@@ -197,7 +219,6 @@ public class UserInterface implements Runnable, ActionListener{
         transInputCont.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         transInputCont.add(container, BorderLayout.NORTH);
     
-        
     }
 
     /**
@@ -238,7 +259,6 @@ public class UserInterface implements Runnable, ActionListener{
         transInputCont.add(container, BorderLayout.NORTH);
 
     }
-
     private void resetInputTransCont(){
         clearTransInputCont(); // clear panel
         
@@ -257,8 +277,6 @@ public class UserInterface implements Runnable, ActionListener{
         transInputCont.repaint();
     }
 
-   
-
     /**
      * clears transInputCont Panel
      */
@@ -267,7 +285,6 @@ public class UserInterface implements Runnable, ActionListener{
         transInputCont.revalidate(); //tells the layout manager to re-layout
         transInputCont.repaint(); //repaint the panel
     }
-
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new UserInterface());

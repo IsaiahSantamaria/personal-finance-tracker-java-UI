@@ -13,10 +13,10 @@ public class Root extends JFrame {
     public ContentCont content;
     public Root(){
         setTitle("Personal Finance Tacker by Software security");
-        setSize(1000,500);
+        setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
+        add(new RecentTransaction());
         
         setVisible(true);
         
