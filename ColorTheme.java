@@ -10,6 +10,10 @@ public class ColorTheme {
     public final Color QUATERNARY = new Color(114, 75,57);
     public final Color QUINARY = new Color(207,157,123);
 
+    public final Color INCOME = new Color(235, 44, 22);
+    public final Color EXPENSE = new Color(235, 44, 22);
+
+
     public ColorTheme(){
     }
 }
