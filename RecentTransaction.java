@@ -20,10 +20,12 @@ public class RecentTransaction extends JPanel{
     private JButton print_csv_btn;
 
     public RecentTransaction(){
-       setLayout(new BorderLayout());
-        setForeground(COLOR_THEME.QUATERNARY);
-        setBackground(COLOR_THEME.PRIMARY);
 
+        setLayout(new BorderLayout()); //helps controls layout of components
+        setPreferredSize(new Dimension(350, 400));//sets size of whole container
+        setBorder(BorderFactory.createEmptyBorder(10,10,10,10)); //10 pixels of padding in each side of container
+
+    
         //setting up JTable and its test data cases for table
         String[][] data = { {"+1000", "Income", "Bill", "Income", "1/1/1"}, {"Jane", "30"} };
         String[] columns = {"Amount", "Type", "Category", "Account", "Date"};
@@ -31,7 +33,9 @@ public class RecentTransaction extends JPanel{
         String [] dataTwo =  {"-1000", "Expense", "Bill", "Expense", "1/1/1"};
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
-
+        
+        table.setSize(new Dimension(200, 200));
+        //table.setBackground(COLOR_THEME.PRIMARY);
         table.setForeground(COLOR_THEME.QUATERNARY); //setting rest of row text color
             
  
@@ -45,15 +49,21 @@ public class RecentTransaction extends JPanel{
  
         // setting up JButton and its container
         print_csv_btn = new JButton("Print CSV");
-        JPanel btn_container = new JPanel();
+        JContainer btn_container = new JContainer();
         btn_container.setSize(100,100);
         print_csv_btn.setSize(new Dimension(100,50));
         btn_container.add(print_csv_btn);
       
-        
+       
+
         // adding all JPanels
-        add(new JScrollPane(table));
-        add(new JPanel(new BorderLayout()){{
+        add(new JScrollPane(table){{
+            getViewport().setBackground(COLOR_THEME.SECONDARY); //setting background to dark theme color since just setting background color is not working
+            setBorder(BorderFactory.createLineBorder(COLOR_THEME.SECONDARY)); //prevents white border lines to be visible
+        }});
+
+        add(new JContainer(new BorderLayout()){{
+            
             add(print_csv_btn, "East");
         }}, "South");
 
@@ -65,7 +75,7 @@ public class RecentTransaction extends JPanel{
         /*setting up fonts and sizes */
         // table header
         JTableHeader header = table.getTableHeader();
-        header.setFont(new Font("Serif", Font.BOLD, 18));
+        header.setFont(new Font("Serif", Font.BOLD, 15));
         header.setForeground(COLOR_THEME.QUINARY); //controls header row table text color
         header.setBackground(COLOR_THEME.PRIMARY); 
 

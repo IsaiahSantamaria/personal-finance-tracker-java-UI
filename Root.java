@@ -11,16 +11,36 @@ public class Root extends JPanel {
     public InputCont inputCont;
     public AccountsCont AcntCont;
     public ContentCont content;
+    public static final ColorTheme COLOR_THEME = new ColorTheme();
     public Root(){
-        
 
-        //add(new AccountsCont()); //first container(List all of the accounts name)
-        //add(new InputCont()); // input options container
-        add(new RecentTransaction()); //displays recent Transaction
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40)); // makes Root have auto padding
+        setBackground(COLOR_THEME.PRIMARY);
+
+
+
+        
+        setSize(1500,500);
+
+     
+        add(new RecentTransaction());
+        add(new RecentTransaction());
+        add(new RecentTransaction());
+        
+        
+        
         
         setVisible(true);
         
     }
+
+    public static void main(String []args){
+        new Root();
+    }
+
+    
+
 
 
     
