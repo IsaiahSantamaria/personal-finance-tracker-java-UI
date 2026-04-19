@@ -24,9 +24,8 @@ public class Root extends JPanel {
         setSize(1500,500);
 
      
-        add(new RecentTransaction());
-        add(new RecentTransaction());
-        add(new RecentTransaction());
+        add(new AccountsCont());
+        
         
         
         
