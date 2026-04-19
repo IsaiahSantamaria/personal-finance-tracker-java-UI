@@ -6,28 +6,21 @@ import javax.swing.*;
  * @author Isaiah Santamaria
  * @version 4/16/2025
  */
-public class Root extends JFrame {
+public class Root extends JPanel {
     public RecentTransaction rTCont;
     public InputCont inputCont;
     public AccountsCont AcntCont;
     public ContentCont content;
     public Root(){
-        setTitle("Personal Finance Tacker by Software security");
-        setSize(500,500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
 
-        add(new RecentTransaction());
+        //add(new AccountsCont()); //first container(List all of the accounts name)
+        //add(new InputCont()); // input options container
+        add(new RecentTransaction()); //displays recent Transaction
         
         setVisible(true);
         
     }
-
-    public static void main(String []args){
-        new Root();
-    }
-
-    
-
 
 
     
