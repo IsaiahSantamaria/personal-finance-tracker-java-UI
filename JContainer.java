@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.*;
 /**
  * This panels purpose is used to shape and position other components
@@ -15,6 +15,11 @@ public class JContainer extends JPanel{
     }
 
     public JContainer(BorderLayout e){
+        super(e);
+        super.setOpaque(false);
+    }
+
+    public JContainer(GridLayout e){
         super(e);
         super.setOpaque(false);
     }

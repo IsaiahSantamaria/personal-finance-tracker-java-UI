@@ -47,7 +47,7 @@ public class AccountsCont extends JPanel{
       super.paintComponent(var1);
       Graphics2D var2 = (Graphics2D)var1;
       var2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      var2.setColor(COLOR_THEME.SECONDARY);
+      var2.setColor(COLOR_THEME.PRIMARY);
       var2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 50, 50);
    }
 
@@ -68,10 +68,17 @@ public class AccountsCont extends JPanel{
             //intializing JLabel names
             nameLabel = new JLabel(name);
             amountLabel = new JLabel("$" + amount);
+            JLabel account = new JLabel("Account");
 
             //styling label
             nameLabel.setFont(new Font("Serif", Font.BOLD, 15));
+            nameLabel.setForeground(new ColorTheme().QUINARY);
             amountLabel.setFont(new Font("Serif", Font.BOLD, 22));
+            amountLabel.setForeground(new ColorTheme().QUINARY);
+            account.setFont(new Font("Serif", Font.BOLD, 12));
+            account.setForeground(new ColorTheme().QUINARY);
+            
+            
 
             add(nameLabel,"North");
             //setting bottom half with number total and small label of account
@@ -82,7 +89,7 @@ public class AccountsCont extends JPanel{
                     setOpaque(false);
                     setLayout(new GridLayout(2,0,2,2));
                     add(amountLabel);
-                    add(new JLabel("Account"));
+                    add(account);
                 }},"West");
             }},"South");
             
@@ -93,7 +100,7 @@ public class AccountsCont extends JPanel{
             super.paintComponent(var1);
             Graphics2D var2 = (Graphics2D)var1;
             var2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            var2.setColor(theme);
+            var2.setColor(new ColorTheme().TERTIARY);
             var2.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 25, 25);
         }
    }
